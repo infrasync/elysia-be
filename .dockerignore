@@ -172,11 +172,10 @@ dist
 
 private/
 
-# database
-
-*.db
-
-# vercel
-
-.vercel
-public/globals.css
+# docker
+.git/
+.github/
+.vscode/
+docker/
+.dockerignore
+README.md

@@ -1,15 +1,62 @@
 {
-  "name": "noteme",
+  "name": "elysia-example",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "----BUILD": "",
+    "build": "tailwindcss -i ./src/styles/globals.css -o ./public/globals.css",
+    "build:vercel": "bun run build && bun scripts/transform-paths.ts",
+    "----RUN": "",
+    "dev": "concurrently \"bun --watch src/index.ts\" \"bun run build --watch\"",
+    "start": "bun run build && bun src/index.ts",
+    "----CHECK": "",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "eslint --ignore-path .gitignore --fix . ",
+    "typecheck": "tsc --noEmit",
+    "----DATABASE": "",
+    "db:drop": "dotenv drizzle-kit drop",
+    "db:generate": "dotenv -e .env drizzle-kit generate",
+    "db:push": "dotenv drizzle-kit push",
+    "db:view": "dotenv drizzle-kit studio",
+    "db:migrate": "dotenv tsx src/db/migrations/index.ts",
+    "db:seed": "dotenv tsx src/db/seeds/index.ts",
+    "db:studio": "dotenv drizzle-kit studio"
   },
   "dependencies": {
-    "elysia": "latest"
+    "@elysiajs/html": "^1.0.2",
+    "@elysiajs/static": "^1.0.3",
+    "@elysiajs/swagger": "^1.0.5",
+    "@libsql/client": "^0.6.2",
+    "@t3-oss/env-core": "^0.10.1",
+    "drizzle-orm": "^0.31.2",
+    "drizzle-typebox": "^0.1.1",
+    "elysia": "latest",
+    "logestic": "^1.2.0",
+    "ts-pattern": "^5.1.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@faker-js/faker": "^8.4.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
+    "@tailwindcss/typography": "^0.5.13",
+    "@total-typescript/ts-reset": "^0.5.1",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "bun-types": "latest",
+    "concurrently": "^8.2.2",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
+    "drizzle-kit": "^0.22.6",
+    "eslint": "^9.4.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier-plugin-tailwind-css": "^1.5.0",
+    "tailwindcss": "^3.4.4",
+    "tailwindcss-animate": "^1.0.7",
+    "ts-toolbelt": "^9.6.0",
+    "tsx": "^4.15.2",
+    "typed-html": "^3.0.1",
+    "typescript": "^5.4.5"
   },
   "module": "src/index.js"
 }
