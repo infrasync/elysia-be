@@ -11,13 +11,24 @@ const toggle = z
   .transform((v) => v === 'true' || v === '1');
 
 const envVariables = z.object({
-  DATABASE_AUTH_TOKEN: z.string().min(1),
-  DATABASE_URL: z.string().min(1),
+  DATABASE_URL: z
+    .string()
+    .url()
+    .refine(
+      (str) => !str.includes('YOUR_DATABASE_URL_HERE'),
+      'You forgot to change the default URL',
+    ),
   NODE_ENV: z
-    .enum(['development', 'production', 'test'])
+    .enum(['development', 'test', 'production'])
     .default('development'),
-  PORT: z.coerce.number().default(3000),
-  RUNTIME: z.enum(['bun', 'edge']).default('bun'),
+  SMTP_HOST: z.string().trim().min(1),
+  SMTP_PORT: z.string(),
+  SMTP_USER: z.string().trim().min(1),
+  SMTP_PASSWORD: z.string().trim().min(1),
+  NEXT_PUBLIC_APP_URL: z.string().url(),
+  GOOGLE_CLIENT_ID: z.string().trim().min(1),
+  GOOGLE_CLIENT_SECRET: z.string().trim().min(1),
+  PORT: z.string().default('5173'),
 });
 
 export const env = envVariables.parse(process.env);

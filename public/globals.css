@@ -590,6 +590,10 @@ body {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-full {
   height: 100%;
 }
@@ -654,10 +658,6 @@ body {
 
 .p-12 {
   padding: 3rem;
-}
-
-.p-6 {
-  padding: 1.5rem;
 }
 
 .px-12 {

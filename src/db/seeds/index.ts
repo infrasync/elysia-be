@@ -1,5 +1,6 @@
-import { runNotesSeed } from "./notes.seed";
+import { runPostsSeed } from "./posts.seed";
+import { runUsersSeed } from "./users.seed";
 
-Promise.all([runNotesSeed()]).then(() => {
+Promise.all([runPostsSeed(), runUsersSeed()]).then(() => {
   console.log("✅ All Seeds completed");
 })

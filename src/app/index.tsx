@@ -1,8 +1,7 @@
 import { html } from '@elysiajs/html';
 import { swagger } from '@elysiajs/swagger';
 import { createElysia } from '@/utils/elysia';
-import { routes as notesRoutes } from './notes';
-
+import { routes as postsRoutes } from './posts';
 export const app = createElysia()
   // Plugins on all routes
   .use(swagger())
@@ -10,7 +9,7 @@ export const app = createElysia()
   .use(html())
 
   // Page routes
-  .use(notesRoutes)
+  .use(postsRoutes)
   .get('/health', (ctx) => 'ok');
 
 export type App = typeof app;

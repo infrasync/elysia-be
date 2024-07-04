@@ -1,19 +1,14 @@
 
 import { defineConfig } from 'drizzle-kit';
 import { env } from './src/env';
+import { DATABASE_PREFIX } from '@/lib/constant';
 
 export default defineConfig({
   schema: './src/db/schemas/*.ts',
   out: './src/db/migrations',
-  dialect: 'sqlite',
-  driver: 'turso',
+  dialect: 'postgresql',
   dbCredentials: {
-    url: env.DATABASE_URL,
-    authToken: env.DATABASE_AUTH_TOKEN,
+    url: process.env.DATABASE_URL!,
   },
-  verbose: true,
-  strict: true,
-  // tablesFilter: [`${DATABASE_PREFIX}_*`],
+  tablesFilter: [`${DATABASE_PREFIX}_*`],
 });
-
-
